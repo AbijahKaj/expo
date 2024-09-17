@@ -167,7 +167,7 @@ function getDefaultConfig(projectRoot, { mode, isCSSEnabled = true, unstable_bef
         console.log(`- Reanimated: ${reanimatedVersion}`);
         console.log();
     }
-    const { 
+    const {
     // Remove the default reporter which metro always resolves to be the react-native-community/cli reporter.
     // This prints a giant React logo which is less accessible to users on smaller terminals.
     reporter, ...metroDefaultValues } = getDefaultMetroConfig.getDefaultValues(projectRoot);
@@ -192,7 +192,7 @@ function getDefaultConfig(projectRoot, { mode, isCSSEnabled = true, unstable_bef
             assetExts: metroDefaultValues.resolver.assetExts
                 .concat(
             // Add default support for `expo-image` file types.
-            ['heic', 'avif'], 
+            ['heic', 'avif'],
             // Add default support for `expo-sqlite` file types.
             ['db'])
                 .filter((assetExt) => !sourceExts.includes(assetExt)),
@@ -280,6 +280,7 @@ function getDefaultConfig(projectRoot, { mode, isCSSEnabled = true, unstable_bef
             // `require.context` support
             unstable_allowRequireContext: true,
             allowOptionalDependencies: true,
+            hermesParser: true,
             babelTransformerPath: require.resolve('./babel-transformer'),
             // See: https://github.com/facebook/react-native/blob/v0.73.0/packages/metro-config/index.js#L72-L74
             asyncRequireModulePath: (0, resolve_from_1.default)(reactNativePath, metroDefaultValues.transformer.asyncRequireModulePath),

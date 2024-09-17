@@ -21,8 +21,8 @@ find_package(ReactAndroid REQUIRED CONFIG)
 find_package(fbjni REQUIRED CONFIG)
 
 get_target_property(INCLUDE_fabricjni
-        ReactAndroid::fabricjni
-        INTERFACE_INCLUDE_DIRECTORIES)
+       ReactAndroid::reactnative
+       INTERFACE_INCLUDE_DIRECTORIES)
 
 target_include_directories(fabric PRIVATE
   "${REACT_NATIVE_DIR}/ReactCommon"
@@ -30,21 +30,28 @@ target_include_directories(fabric PRIVATE
   "${INCLUDE_fabricjni}/react/fabric"
 )
 
-target_link_libraries(fabric
-  CommonSettings
-  fbjni::fbjni
-  ReactAndroid::fabricjni
-  ReactAndroid::folly_runtime
-  ReactAndroid::glog
-  ReactAndroid::jsi
-  ReactAndroid::react_debug
-  ReactAndroid::react_render_componentregistry
-  ReactAndroid::react_render_core
-  ReactAndroid::react_render_debug
-  ReactAndroid::react_render_graphics
-  ReactAndroid::react_render_mapbuffer
-  ReactAndroid::react_utils
-  ReactAndroid::rrc_view
-  ReactAndroid::runtimeexecutor
-  ReactAndroid::yoga
-)
+
+# if (REACTNATIVE_MERGED_SO)
+   target_link_libraries(fabric ReactAndroid::reactnative)
+# else()
+   target_link_libraries(fabric
+    CommonSettings
+    fbjni::fbjni
+#     ReactAndroid::fabricjni
+#     ReactAndroid::folly_runtime
+#     ReactAndroid::glog
+#     ReactAndroid::react_debug
+#     ReactAndroid::react_render_componentregistry
+#     ReactAndroid::react_render_core
+#     ReactAndroid::react_render_debug
+#     ReactAndroid::react_render_graphics
+#     ReactAndroid::react_render_mapbuffer
+#     ReactAndroid::react_utils
+#     ReactAndroid::rrc_view
+#     ReactAndroid::runtimeexecutor
+#     ReactAndroid::yoga
+  )
+# endif()
+target_link_libraries(fabric ReactAndroid::jsi)
+
+

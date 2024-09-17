@@ -76,11 +76,12 @@ class ReactHostWrapper(reactNativeHost: ReactNativeHost, reactHost: ReactHost?) 
   val jsExecutorName: String
     get() {
       if (isBridgelessMode) {
-        return if (reactHost.jsEngineResolutionAlgorithm == JSEngineResolutionAlgorithm.JSC) {
-          "JSC"
-        } else {
-          "Hermes"
-        }
+         return "Hermes"
+//        return if (reactHost.jsEngineResolutionAlgorithm == JSEngineResolutionAlgorithm.JSC) {
+//          "JSC"
+//        } else {
+//          "Hermes"
+//        }
       }
 
       return reactNativeHost.reactInstanceManager.jsExecutorName

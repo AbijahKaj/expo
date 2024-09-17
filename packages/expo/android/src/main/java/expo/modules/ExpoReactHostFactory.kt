@@ -107,7 +107,7 @@ object ExpoReactHostFactory {
           useDeveloperSupport
         )
           .apply {
-            jsEngineResolutionAlgorithm = reactNativeHost.jsEngineResolutionAlgorithm
+//            jsEngineResolutionAlgorithm = reactNativeHost.jsEngineResolutionAlgorithm
           }
 
       reactNativeHost.reactNativeHostHandlers.forEach { handler ->

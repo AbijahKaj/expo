@@ -17,10 +17,10 @@ std::unordered_map<std::string, folly::dynamic> propsMapFromProps(const ExpoView
 
   // Iterate over values in the raw props object.
   // Note that it contains only updated props.
-  rawProps.iterateOverValues([&propsMap](react::RawPropsPropNameHash hash, const char *name, const react::RawValue &value) {
-    std::string propName(name);
-    propsMap[propName] = (folly::dynamic)value;
-  });
+//  rawProps.iterateOverValues([&propsMap](react::RawPropsPropNameHash hash, const char *name, const react::RawValue &value) {
+//    std::string propName(name);
+//    propsMap[propName] = (folly::dynamic)value;
+//  });
 
   return propsMap;
 }

@@ -61,7 +61,7 @@ object DevMenuReactHost {
       useDeveloperSupport
     )
       .apply {
-        jsEngineResolutionAlgorithm = jsResolutionAlgorithm
+//        jsEngineResolutionAlgorithm = jsResolutionAlgorithm
       }
     if (useDeveloperSupport) {
       injectDevServerSettings(application.applicationContext, reactHost)

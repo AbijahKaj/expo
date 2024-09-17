@@ -89,18 +89,18 @@ find_package(fbjni REQUIRED CONFIG)
 
 # includes
 
-get_target_property(INCLUDE_reactnativejni
-        ReactAndroid::reactnativejni
-        INTERFACE_INCLUDE_DIRECTORIES)
+#get_target_property(INCLUDE_reactnativejni
+#        ReactAndroid::reactnativejni
+#        INTERFACE_INCLUDE_DIRECTORIES)
 target_include_directories(
-        ${PACKAGE_NAME}
-        PRIVATE
-        ${INCLUDE_reactnativejni}/react
-
-        # header only imports from turbomodule, e.g. CallInvokerHolder.h
-        "${REACT_NATIVE_DIR}/ReactAndroid/src/main/jni/react/turbomodule"
-        "${COMMON_DIR}"
-        "${SRC_DIR}/fabric"
+       ${PACKAGE_NAME}
+       PRIVATE
+#        ${INCLUDE_reactnativejni}/react
+#
+#        # header only imports from turbomodule, e.g. CallInvokerHolder.h
+#        "${REACT_NATIVE_DIR}/ReactAndroid/src/main/jni/react/turbomodule"
+       "${COMMON_DIR}"
+       "${SRC_DIR}/fabric"
 )
 
 # linking
@@ -112,17 +112,24 @@ target_compile_options(
         PRIVATE
         ${folly_FLAGS}
 )
-
+# This if-then-else can be removed once this library does not support version below 0.76
+# if (REACTNATIVE_MERGED_SO)
+   target_link_libraries(
+    ${PACKAGE_NAME}
+    ReactAndroid::reactnative
+   )
+# else()
 target_link_libraries(
         ${PACKAGE_NAME}
         CommonSettings
         ${LOG_LIB}
         fbjni::fbjni
-        ReactAndroid::jsi
-        ReactAndroid::reactnativejni
-        ReactAndroid::folly_runtime
-        ReactAndroid::react_nativemodule_core
+#    #     ReactAndroid::reactnativejni
+#         ReactAndroid::folly_runtime
+#         ReactAndroid::react_nativemodule_core
         android
         ${JSEXECUTOR_LIB}
         ${NEW_ARCHITECTURE_DEPENDENCIES}
 )
+# endif()
+target_link_libraries(${PACKAGE_NAME} ReactAndroid::jsi)
